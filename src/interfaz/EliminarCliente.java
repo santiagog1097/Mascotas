@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import Mundo.CentralClientes;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -13,6 +16,7 @@ public class EliminarCliente {
 
 	private JFrame frmEliminarCliente;
 	private JTextField textField;
+	private CentralClientes listaClientes;
 
 	/**
 	 * Launch the application.
@@ -21,7 +25,7 @@ public class EliminarCliente {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EliminarCliente window = new EliminarCliente();
+					//EliminarCliente window = new EliminarCliente();
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,8 +37,9 @@ public class EliminarCliente {
 	/**
 	 * Create the application.
 	 */
-	public EliminarCliente() {
+	public EliminarCliente(CentralClientes lista) {
 		initialize();
+		this.listaClientes =lista;
 	}
 
 	/**
@@ -60,7 +65,7 @@ public class EliminarCliente {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmEliminarCliente.setVisible(false);
-				GestionClientes gcl = new GestionClientes();
+				GestionClientes gcl = new GestionClientes(listaClientes);
 			}
 		});
 		btnCancelar.setBounds(88, 157, 89, 23);

@@ -14,12 +14,15 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import Mundo.*;
 
 public class GestionClientes {
 
 	private JFrame frmGestinDeClientes;
 	private JTable table;
 	private JTable table_1;
+	private CentralClientes listaClientes;
+	private Cliente temp;
 
 	/**
 	 * Launch the application.
@@ -28,7 +31,7 @@ public class GestionClientes {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GestionClientes window = new GestionClientes();
+					//GestionClientes window = new GestionClientes();
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,8 +43,10 @@ public class GestionClientes {
 	/**
 	 * Create the application.
 	 */
-	public GestionClientes() {
+	public GestionClientes(CentralClientes lista) {
 		initialize();
+		this.listaClientes = lista;
+		listaClientes.mostrarLista();
 	}
 
 	/**
@@ -69,7 +74,7 @@ public class GestionClientes {
 		JButton btnAgregar = new JButton("Agregar");
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				AgregarCliente addCliente = new AgregarCliente();
+				AgregarCliente addCliente = new AgregarCliente(listaClientes);
 				
 				
 			}
@@ -79,7 +84,7 @@ public class GestionClientes {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmGestinDeClientes.setVisible(false);
-				BuscarCliente bcli = new BuscarCliente();
+				BuscarCliente bcli = new BuscarCliente(listaClientes);
 			}
 		});
 		
@@ -87,7 +92,7 @@ public class GestionClientes {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmGestinDeClientes.setVisible(false);
-				EliminarCliente elcl = new EliminarCliente();
+				EliminarCliente elcl = new EliminarCliente(listaClientes);
 			}
 		});
 		

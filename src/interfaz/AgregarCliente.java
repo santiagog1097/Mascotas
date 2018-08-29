@@ -2,6 +2,7 @@ package interfaz;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -17,7 +18,7 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+import Mundo.*;
 public class AgregarCliente {
 
 	private JFrame frmAgregarCliente;
@@ -27,6 +28,7 @@ public class AgregarCliente {
 	private JTextField txtTelefono;
 	private JButton btnCancelar;
 	private JButton btnAgregar;
+	private CentralClientes listaClientes;
 
 	/**
 	 * Launch the application.
@@ -35,7 +37,7 @@ public class AgregarCliente {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AgregarCliente window = new AgregarCliente();
+					//AgregarCliente window = new AgregarCliente();
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,8 +49,9 @@ public class AgregarCliente {
 	/**
 	 * Create the application.
 	 */
-	public AgregarCliente() {
+	public AgregarCliente(CentralClientes lista) {
 		initialize();
+		this.listaClientes = lista;
 	}
 
 	/**
@@ -135,7 +138,7 @@ public class AgregarCliente {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmAgregarCliente.setVisible(false);
-				GestionClientes cli = new GestionClientes();
+				GestionClientes cli = new GestionClientes(listaClientes);
 			}
 		});
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
@@ -148,7 +151,10 @@ public class AgregarCliente {
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frmAgregarCliente.setVisible(false);
-				AgregarClienteOpciones clop = new  AgregarClienteOpciones();
+				//Guardamos la referncia del cliente que deseamos crear para pasarselo al nuevo formulario
+				Cliente nuevoCliente = new Cliente(Integer.parseInt(txtIdentifiacion.getText()),txtNombre.getText(),txtDireccion.getText(),txtTelefono.getText());
+				//AgregarClienteOpciones clop = new  AgregarClienteOpciones();
+				AgregarClienteOpciones pasoReferencia = new  AgregarClienteOpciones(nuevoCliente,listaClientes);
 			}
 		});
 		GridBagConstraints gbc_btnAgregar = new GridBagConstraints();

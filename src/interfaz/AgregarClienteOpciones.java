@@ -18,13 +18,16 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+import Mundo.*;
 public class AgregarClienteOpciones {
 
 	private JFrame frmAgregarCliente;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textAntesDe;
+	private JTextField textDespuesDe;
+	
+	private Cliente e;
+	private CentralClientes listaClientes;
 
 	/**
 	 * Launch the application.
@@ -33,7 +36,7 @@ public class AgregarClienteOpciones {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AgregarClienteOpciones window = new AgregarClienteOpciones();
+					//AgregarClienteOpciones window = new AgregarClienteOpciones();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -43,9 +46,12 @@ public class AgregarClienteOpciones {
 
 	/**
 	 * Create the application.
+	 * @wbp.parser.entryPoint
 	 */
-	public AgregarClienteOpciones() {
+	public AgregarClienteOpciones(Cliente c,CentralClientes lista) {
 		initialize();
+		this.e = c;
+		this.listaClientes = lista;
 	}
 
 	/**
@@ -64,41 +70,41 @@ public class AgregarClienteOpciones {
 		frmAgregarCliente.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Agregar al comienzo de la lista");
-		buttonGroup.add(rdbtnNewRadioButton);
-		rdbtnNewRadioButton.setBounds(6, 16, 218, 23);
-		panel.add(rdbtnNewRadioButton);
+		JRadioButton rdbtnAlComienzo = new JRadioButton("Agregar al comienzo de la lista");
+		buttonGroup.add(rdbtnAlComienzo);
+		rdbtnAlComienzo.setBounds(6, 16, 218, 23);
+		panel.add(rdbtnAlComienzo);
 		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Agregar al final de la lista");
-		buttonGroup.add(rdbtnNewRadioButton_1);
-		rdbtnNewRadioButton_1.setBounds(6, 64, 218, 23);
-		panel.add(rdbtnNewRadioButton_1);
+		JRadioButton rdbtnAlFinal = new JRadioButton("Agregar al final de la lista");
+		buttonGroup.add(rdbtnAlFinal);
+		rdbtnAlFinal.setBounds(6, 64, 218, 23);
+		panel.add(rdbtnAlFinal);
 		
-		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Antes del cliente con el c\u00F3digo");
-		buttonGroup.add(rdbtnNewRadioButton_2);
-		rdbtnNewRadioButton_2.setBounds(6, 121, 218, 23);
-		panel.add(rdbtnNewRadioButton_2);
+		JRadioButton rdbtnAntesDe = new JRadioButton("Antes del cliente con el c\u00F3digo");
+		buttonGroup.add(rdbtnAntesDe);
+		rdbtnAntesDe.setBounds(6, 121, 218, 23);
+		panel.add(rdbtnAntesDe);
 		
-		JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("Despu\u00E9s del cliente con el c\u00F3digo");
-		buttonGroup.add(rdbtnNewRadioButton_3);
-		rdbtnNewRadioButton_3.setBounds(6, 186, 218, 23);
-		panel.add(rdbtnNewRadioButton_3);
+		JRadioButton rdbtnDespuesDe = new JRadioButton("Despu\u00E9s del cliente con el c\u00F3digo");
+		buttonGroup.add(rdbtnDespuesDe);
+		rdbtnDespuesDe.setBounds(6, 186, 218, 23);
+		panel.add(rdbtnDespuesDe);
 		
-		textField = new JTextField();
-		textField.setBounds(289, 122, 86, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		textAntesDe = new JTextField();
+		textAntesDe.setBounds(289, 122, 86, 20);
+		panel.add(textAntesDe);
+		textAntesDe.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(289, 187, 86, 20);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		textDespuesDe = new JTextField();
+		textDespuesDe.setBounds(289, 187, 86, 20);
+		panel.add(textDespuesDe);
+		textDespuesDe.setColumns(10);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmAgregarCliente.setVisible(false);
-				AgregarCliente cl = new AgregarCliente();
+				AgregarCliente cl = new AgregarCliente(listaClientes);
 			}
 		});
 		btnCancelar.setBounds(20, 262, 89, 23);
@@ -108,6 +114,28 @@ public class AgregarClienteOpciones {
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//Mensaje de transacción hecha correctamente
+				//Se agrega al comienzo de la lista
+				if(rdbtnAlComienzo.isSelected()) {
+					listaClientes.insert1Elemento(e);
+					//System.out.println("Identificación" + e.getIdentificacion()+"Direccion:"+ e.getDireccion());
+				}
+				//Se inserta al final de la lista
+				if(rdbtnAlFinal.isSelected()) {
+					listaClientes.insertarAlfinal(e);
+				}
+				
+				//Se inserta un cliente antes del cliente con codigo
+				if(rdbtnAntesDe.isSelected()) {
+					listaClientes.insertarAntesDe(Integer.parseInt(textAntesDe.getText()), e);
+				}
+				
+				//Se inserta un cliente después del cliente con código
+				if(rdbtnDespuesDe.isSelected()) {
+					listaClientes.insertarDespuesDe(Integer.parseInt(textDespuesDe.getText()), e);
+				}
+				System.out.println("Mostramos Lista");
+				listaClientes.mostrarLista();
+				
 				//Actualizar la tabla de clientes
 			}
 		});

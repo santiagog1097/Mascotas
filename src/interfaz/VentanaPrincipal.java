@@ -3,6 +3,9 @@ package interfaz;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+
+import Mundo.CentralClientes;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -55,7 +58,7 @@ public class VentanaPrincipal {
 		btnGestinDeClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				GestionClientes a = new GestionClientes();
+				GestionClientes a = new GestionClientes(new CentralClientes());
 			}
 		});
 		btnGestinDeClientes.setBounds(129, 118, 185, 23);

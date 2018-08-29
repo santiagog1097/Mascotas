@@ -12,6 +12,9 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import Mundo.CentralClientes;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -20,7 +23,7 @@ public class BuscarCliente {
 
 	private JFrame frmBuscarCliente;
 	private JTextField textField;
-
+	private CentralClientes listaClientes;
 	/**
 	 * Launch the application.
 	 */
@@ -28,7 +31,7 @@ public class BuscarCliente {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BuscarCliente window = new BuscarCliente();
+					//BuscarCliente window = new BuscarCliente();
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,8 +43,9 @@ public class BuscarCliente {
 	/**
 	 * Create the application.
 	 */
-	public BuscarCliente() {
+	public BuscarCliente(CentralClientes lista) {
 		initialize();
+		this.listaClientes =lista;
 	}
 
 	/**
@@ -62,7 +66,7 @@ public class BuscarCliente {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmBuscarCliente.setVisible(false);
-				GestionClientes clg = new GestionClientes();
+				GestionClientes clg = new GestionClientes(listaClientes);
 			}
 		});
 		
