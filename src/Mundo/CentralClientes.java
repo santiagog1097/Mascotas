@@ -4,7 +4,7 @@ package Mundo;
 
 public class CentralClientes {
 	
-	Cliente primero;
+	public Cliente primero;
 	
 	// Insertar un elemento en la lista
 		public void insert1Elemento(Cliente a) {
