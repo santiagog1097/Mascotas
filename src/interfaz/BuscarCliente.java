@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
@@ -22,7 +23,7 @@ import java.awt.event.ActionEvent;
 public class BuscarCliente {
 
 	private JFrame frmBuscarCliente;
-	private JTextField textField;
+	private JTextField textidentificacion;
 	private CentralClientes listaClientes;
 	/**
 	 * Launch the application.
@@ -42,6 +43,7 @@ public class BuscarCliente {
 
 	/**
 	 * Create the application.
+	 * @wbp.parser.entryPoint
 	 */
 	public BuscarCliente(CentralClientes lista) {
 		initialize();
@@ -59,8 +61,8 @@ public class BuscarCliente {
 		
 		JLabel lblNewLabel = new JLabel("Identificaci\u00F3n");
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		textidentificacion = new JTextField();
+		textidentificacion.setColumns(10);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
@@ -73,7 +75,17 @@ public class BuscarCliente {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JOptionPane mensaje = new JOptionPane();
 				//Mensajse que diga si existe o no el cliente
+				//En caso de que exista
+				if(listaClientes.buscarElemento(Integer.parseInt(textidentificacion.getText()))!=null) {
+					mensaje.showMessageDialog(null,"El cliente identificado con el código " + textidentificacion.getText() +" ha sido encontrado");
+				}else {
+					//En caso de que no exista
+					mensaje.showMessageDialog(null,"El cliente identificado con el código " + textidentificacion.getText() +" no ha sido encontrado");
+				}
+				
+	
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(frmBuscarCliente.getContentPane());
@@ -84,7 +96,7 @@ public class BuscarCliente {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-							.addComponent(textField)
+							.addComponent(textidentificacion)
 							.addGroup(groupLayout.createSequentialGroup()
 								.addComponent(btnCancelar)
 								.addGap(18)
@@ -97,7 +109,7 @@ public class BuscarCliente {
 					.addGap(70)
 					.addComponent(lblNewLabel)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(textidentificacion, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(45)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnCancelar)

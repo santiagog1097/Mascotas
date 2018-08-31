@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import Mundo.CentralClientes;
@@ -15,7 +16,7 @@ import java.awt.event.ActionEvent;
 public class EliminarCliente {
 
 	private JFrame frmEliminarCliente;
-	private JTextField textField;
+	private JTextField textIdentificacion;
 	private CentralClientes listaClientes;
 
 	/**
@@ -36,6 +37,7 @@ public class EliminarCliente {
 
 	/**
 	 * Create the application.
+	 * @wbp.parser.entryPoint
 	 */
 	public EliminarCliente(CentralClientes lista) {
 		initialize();
@@ -56,10 +58,10 @@ public class EliminarCliente {
 		lblIdentificacin.setBounds(145, 65, 119, 14);
 		frmEliminarCliente.getContentPane().add(lblIdentificacin);
 		
-		textField = new JTextField();
-		textField.setBounds(145, 104, 119, 20);
-		frmEliminarCliente.getContentPane().add(textField);
-		textField.setColumns(10);
+		textIdentificacion = new JTextField();
+		textIdentificacion.setBounds(145, 104, 119, 20);
+		frmEliminarCliente.getContentPane().add(textIdentificacion);
+		textIdentificacion.setColumns(10);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
@@ -75,6 +77,15 @@ public class EliminarCliente {
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Indicar si el cliente existe o no
+				JOptionPane mensaje = new JOptionPane();
+				if(listaClientes.buscarElemento(Integer.parseInt(textIdentificacion.getText()))!=null) {
+					mensaje.showMessageDialog(null,"El cliente identificado con el código " + textIdentificacion.getText() +" ha sido encontrado");
+					ConfirmarEliminarCliente ne = new ConfirmarEliminarCliente(listaClientes,Integer.parseInt(textIdentificacion.getText()));
+				}else {
+					//En caso de que no exista
+					mensaje.showMessageDialog(null,"El cliente identificado con el código " + textIdentificacion.getText() +" no ha sido encontrado");
+					
+				}
 				//si existe confirmar si lo quiere eliminar o no y luego eliminarlo de la lista.
 			}
 		});
