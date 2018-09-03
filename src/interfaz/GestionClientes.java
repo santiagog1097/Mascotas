@@ -68,7 +68,7 @@ public class GestionClientes {
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				AgregarCliente addCliente = new AgregarCliente(listaClientes);
-
+				frmGestinDeClientes.setVisible(false);
 			}
 		});
 

@@ -58,7 +58,7 @@ public class CentralClientes {
 				anterior = actual;
 				actual = actual.getSiguiente();
 			}
-			System.out.println("El elemento anterior a " + codigo + "es " + anterior.getIdentificacion());
+			//System.out.println("El elemento anterior a " + codigo + "es " + anterior.getIdentificacion());
 			return actual != null ? anterior : null;
 		}
 
@@ -87,7 +87,12 @@ public class CentralClientes {
 		public void eliminarElemento(int codigo) {
 			Cliente actual = buscarElemento(codigo);
 			Cliente anterior = encontraAntesDe(codigo);
-			anterior.setSiguiente(actual.getSiguiente());
+			//Caso en el que sea el primero de la lista
+			if(anterior!=null) {
+				anterior.setSiguiente(actual.getSiguiente());
+			}else {
+				primero=null;
+			}
 		}
 
 		// Insertar un elemento al final

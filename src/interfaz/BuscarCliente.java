@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import Mundo.CentralClientes;
+import Mundo.Cliente;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -75,14 +76,14 @@ public class BuscarCliente {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane mensaje = new JOptionPane();
 				//Mensajse que diga si existe o no el cliente
 				//En caso de que exista
-				if(listaClientes.buscarElemento(Integer.parseInt(textidentificacion.getText()))!=null) {
-					mensaje.showMessageDialog(null,"El cliente identificado con el código " + textidentificacion.getText() +" ha sido encontrado");
+				Cliente encontrado = listaClientes.buscarElemento(Integer.parseInt(textidentificacion.getText()));
+				if(encontrado!=null) {
+					JOptionPane.showMessageDialog(null,"Cliente      : "+ encontrado.getNombre()+"\n"+"Encontrado correctamente","Mensaje informativo",JOptionPane.INFORMATION_MESSAGE);
 				}else {
 					//En caso de que no exista
-					mensaje.showMessageDialog(null,"El cliente identificado con el código " + textidentificacion.getText() +" no ha sido encontrado");
+					JOptionPane.showMessageDialog(null,"El cliente identificado con el código " + textidentificacion.getText() +" no ha sido encontrado");
 				}
 				
 	

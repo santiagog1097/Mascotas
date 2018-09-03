@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import Mundo.CentralClientes;
+import Mundo.Cliente;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -77,13 +78,13 @@ public class EliminarCliente {
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Indicar si el cliente existe o no
-				JOptionPane mensaje = new JOptionPane();
-				if(listaClientes.buscarElemento(Integer.parseInt(textIdentificacion.getText()))!=null) {
-					mensaje.showMessageDialog(null,"El cliente identificado con el código " + textIdentificacion.getText() +" ha sido encontrado");
+				Cliente encontrado = listaClientes.buscarElemento(Integer.parseInt(textIdentificacion.getText()));
+				if(encontrado!=null) {
+					JOptionPane.showMessageDialog(null,"Cliente : "+ encontrado.getNombre()+"\n"+"Encontrado correctamente","Mensaje informativo",JOptionPane.INFORMATION_MESSAGE);
 					ConfirmarEliminarCliente ne = new ConfirmarEliminarCliente(listaClientes,Integer.parseInt(textIdentificacion.getText()));
 				}else {
 					//En caso de que no exista
-					mensaje.showMessageDialog(null,"El cliente identificado con el código " + textIdentificacion.getText() +" no ha sido encontrado");
+					JOptionPane.showMessageDialog(null,"El cliente identificado con el código " + textIdentificacion.getText() +" no ha sido encontrado");
 					
 				}
 				//si existe confirmar si lo quiere eliminar o no y luego eliminarlo de la lista.

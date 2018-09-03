@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import java.awt.GridLayout;
 import java.awt.List;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import javax.swing.BoxLayout;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JRadioButton;
@@ -25,6 +26,7 @@ public class AgregarClienteOpciones {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JTextField textAntesDe;
 	private JTextField textDespuesDe;
+	private GestionClientes ngc;
 	
 	private Cliente e;
 	private CentralClientes listaClientes;
@@ -117,21 +119,33 @@ public class AgregarClienteOpciones {
 				//Se agrega al comienzo de la lista
 				if(rdbtnAlComienzo.isSelected()) {
 					listaClientes.insert1Elemento(e);
+					JOptionPane.showMessageDialog(null,"Transacción finalizada correctamente","Mensaje informativo",JOptionPane.INFORMATION_MESSAGE);
+					ngc = new GestionClientes(listaClientes);
+					frmAgregarCliente.setVisible(false);
 					//System.out.println("Identificación" + e.getIdentificacion()+"Direccion:"+ e.getDireccion());
 				}
 				//Se inserta al final de la lista
 				if(rdbtnAlFinal.isSelected()) {
 					listaClientes.insertarAlfinal(e);
+					JOptionPane.showMessageDialog(null,"Transacción finalizada correctamente","Mensaje informativo",JOptionPane.INFORMATION_MESSAGE);
+					ngc = new GestionClientes(listaClientes);
+					frmAgregarCliente.setVisible(false);
 				}
 				
 				//Se inserta un cliente antes del cliente con codigo
 				if(rdbtnAntesDe.isSelected()) {
 					listaClientes.insertarAntesDe(Integer.parseInt(textAntesDe.getText()), e);
+					JOptionPane.showMessageDialog(null,"Transacción finalizada correctamente","Mensaje informativo",JOptionPane.INFORMATION_MESSAGE);
+					ngc = new GestionClientes(listaClientes);
+					frmAgregarCliente.setVisible(false);
 				}
 				
 				//Se inserta un cliente después del cliente con código
 				if(rdbtnDespuesDe.isSelected()) {
 					listaClientes.insertarDespuesDe(Integer.parseInt(textDespuesDe.getText()), e);
+					JOptionPane.showMessageDialog(null,"Transacción finalizada correctamente","Mensaje informativo",JOptionPane.INFORMATION_MESSAGE);
+					ngc = new GestionClientes(listaClientes);
+					frmAgregarCliente.setVisible(false);
 				}
 				System.out.println("Mostramos Lista");
 				listaClientes.mostrarLista();
